@@ -16,6 +16,7 @@ public class AlterPanelConfig : MonoBehaviour
             configAudio = GameObject.Find("AudioPanel");
             configControle = GameObject.Find("ControlePanel");
             configControle.SetActive(false);
+            gameObject.GetComponent<AlterCanvas>().closeCanvasConfig();
         }
         catch(Exception e)
         {

@@ -17,12 +17,17 @@ public class AlterCanvas : MonoBehaviour
             canvasMenu = GameObject.Find("MenuCanvas");
             canvasConfig = GameObject.Find("ConfigCanvas");
 
-            canvasConfig.SetActive(false);
+            //canvasConfig.SetActive(false); - Etva dando erro pq aqui executava primeiro que o outro script
         }
         catch(Exception e)
         {
             Debug.LogError(e.Message);
         }
+    }
+
+    public void closeCanvasConfig()
+    {
+        canvasConfig.SetActive(false);
     }
 
     public void alterCanvas(int canvas)

@@ -66,6 +66,7 @@
     <Compile Include="Assets\Cenas\MainMenu\Scripts\AlterCanvas.cs" />
     <Compile Include="Assets\Cenas\MainMenu\Scripts\AlterPanelConfig.cs" />
     <Compile Include="Assets\Cenas\MainMenu\Scripts\ConfigControls.cs" />
+    <Compile Include="Assets\Cenas\MainMenu\Scripts\SetAudioValue.cs" />
     <Compile Include="Assets\Classes\Config.cs" />
     <Compile Include="Assets\Classes\Player.cs" />
     <Reference Include="UnityEngine">
