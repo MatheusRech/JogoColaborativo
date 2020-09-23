@@ -41,6 +41,7 @@ public class AlterPanelConfig : MonoBehaviour
             case 1:
                 configAudio.SetActive(false);
                 configControle.SetActive(true);
+                gameObject.GetComponent<ConfigControls>().carregarConfig();
                 panelAtivo = 1;
                 break;
         }

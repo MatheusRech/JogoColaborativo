@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Caixa
+  - Player1
+  - Player2
+  - Plataforma
+  - "Bot\xE3o"
   layers:
   - Default
   - TransparentFX

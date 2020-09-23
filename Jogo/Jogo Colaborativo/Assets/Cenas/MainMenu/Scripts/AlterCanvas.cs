@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class AlterCanvas : MonoBehaviour
 {
+    public GameObject Player1;
+    public GameObject Player2;
+
     private GameObject canvasMenu;
     private GameObject canvasConfig;
 
@@ -44,11 +47,15 @@ public class AlterCanvas : MonoBehaviour
                 canvasMenu.SetActive(true);
                 canvasConfig.SetActive(false);
                 canvasAtivo = 0;
+                Player1.SetActive(true);
+                Player2.SetActive(true);
                 break;
             case 1:
                 canvasMenu.SetActive(false);
                 canvasConfig.SetActive(true);
                 canvasAtivo = 1;
+                Player1.SetActive(false);
+                Player2.SetActive(false);
                 break;
         }
     }

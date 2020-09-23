@@ -63,10 +63,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Cenas\Fase1\Scripts\BotaoSequenciaSecundario.cs" />
+    <Compile Include="Assets\Cenas\Fase1\Scripts\Configurador.cs" />
+    <Compile Include="Assets\Cenas\Fase1\Scripts\botaoCaixa.cs" />
+    <Compile Include="Assets\Cenas\Fase1\Scripts\botaoDeAltaPressao.cs" />
+    <Compile Include="Assets\Cenas\Fase1\Scripts\botaoPortao.cs" />
+    <Compile Include="Assets\Cenas\Fase1\Scripts\botaoSequencia.cs" />
+    <Compile Include="Assets\Cenas\Fase1\Scripts\cameraManager.cs" />
     <Compile Include="Assets\Cenas\MainMenu\Scripts\AlterCanvas.cs" />
     <Compile Include="Assets\Cenas\MainMenu\Scripts\AlterPanelConfig.cs" />
     <Compile Include="Assets\Cenas\MainMenu\Scripts\ConfigControls.cs" />
+    <Compile Include="Assets\Cenas\MainMenu\Scripts\Key.cs" />
     <Compile Include="Assets\Cenas\MainMenu\Scripts\SetAudioValue.cs" />
+    <Compile Include="Assets\Cenas\Scripts\alterScene.cs" />
     <Compile Include="Assets\Classes\Config.cs" />
     <Compile Include="Assets\Classes\Player.cs" />
     <Reference Include="UnityEngine">
