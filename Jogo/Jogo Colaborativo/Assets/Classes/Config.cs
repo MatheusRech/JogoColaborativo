@@ -1,21 +1,20 @@
 ﻿using UnityEngine;
 using System;
+using System.IO;
 
-[Serializable]
 public class Config
 {
-    [SerializeField]
+
     public Key paraFrente { get; private set; }
-    [SerializeField]
+
     public Key paraTras { get; private set; }
-    [SerializeField]
+
     public Key pular { get; private set; }
 
-    [SerializeField]
     public float volumePrincipal { get; private set; }
-    [SerializeField]
+
     public float volumeMusica { get; private set; }
-    [SerializeField]
+
     public float volumeEfx { get; private set; }
 
     void Start()
@@ -89,5 +88,88 @@ public class Config
         defaultConfiguration.setVolumeEfx(100);
 
         return defaultConfiguration;
+    }
+
+    public static Config loadConfig(int numberPlayer)
+    {
+        string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\JogoColaborativo\\Config" + numberPlayer.ToString() + ".txt";
+
+        if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\JogoColaborativo\\"))
+        {
+            Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\JogoColaborativo\\");
+        }
+
+        try {
+            Config config = new Config();
+
+            string[] lines = System.IO.File.ReadAllLines(path);
+
+            Key tecla = new Key();
+            KeyCode key = new KeyCode();
+
+            for (int x = 0; x < lines.Length; x++)
+            {
+                switch (x)
+                {
+                    case 0:
+                        key = (KeyCode)int.Parse(lines[x]);
+                        tecla = new Key(key);
+                        config.setKeyFrente(tecla);
+                        break;
+                    case 1:
+                        key = (KeyCode)int.Parse(lines[x]);
+                        tecla = new Key(key);
+                        config.setKeyTras(tecla);
+                        break;
+                    case 2:
+                        key = (KeyCode)int.Parse(lines[x]);
+                        tecla = new Key(key);
+                        config.setKeyPular(tecla);
+                        break;
+                    case 3:
+                        config.setVolumePrincipal(float.Parse(lines[x]));
+                        break;
+                    case 4:
+                        config.setVolumeMusica(float.Parse(lines[x]));
+                        break;
+                    case 5:
+                        config.setVolumeEfx(float.Parse(lines[x]));
+                        break;
+                }
+            }
+
+            return config;
+        }
+        catch (Exception)
+        {
+            return defaultConfig(numberPlayer);
+        }
+        
+
+    }
+
+    public void saveConfig(int numberPlayer)
+    {
+        string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\JogoColaborativo\\Config" + numberPlayer.ToString() + ".txt";
+
+        if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\JogoColaborativo\\"))
+        {
+            Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\JogoColaborativo\\");
+        }
+
+        try
+        {
+            FileStream file = new FileStream(path, FileMode.Create);
+
+            byte[] texto = System.Text.Encoding.UTF8.GetBytes(((int)paraFrente.keyCode).ToString() + "\n" + ((int)paraTras.keyCode).ToString() + "\n" + ((int)pular.keyCode).ToString() + "\n" + volumePrincipal.ToString() + "\n" + volumeMusica.ToString() + "\n" + volumeEfx.ToString());
+
+            file.Write(texto, 0, texto.Length);
+
+            file.Close();
+        }
+        catch (Exception)
+        {
+
+        }
     }
 }

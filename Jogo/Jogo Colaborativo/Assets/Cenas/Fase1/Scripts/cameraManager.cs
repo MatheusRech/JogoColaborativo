@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class cameraManager : MonoBehaviour
 {
-    public GameObject camera;
+    public GameObject gameObjectCamera;
     private Camera objetoCamera;
 
     private Vector3 player1;
@@ -14,8 +14,8 @@ public class cameraManager : MonoBehaviour
 
     void Start()
     {
-        objetoCamera = camera.GetComponent<Camera>();
-        cameraPosition = camera.transform.position;
+        objetoCamera = gameObjectCamera.GetComponent<Camera>();
+        cameraPosition = gameObjectCamera.transform.position;
 
     }
 
@@ -31,6 +31,8 @@ public class cameraManager : MonoBehaviour
 
         }
 
+
+        //  Distancia da camera
         float size = player1.x - player2.x;
 
         if (size < 0)
@@ -46,6 +48,8 @@ public class cameraManager : MonoBehaviour
             objetoCamera.orthographicSize = 10;
         }
 
+
+        //  Posição X da camera
         if(player1.x > player2.x)
         {
             if(player2.x < 0 && player1.x < 0)
@@ -71,7 +75,34 @@ public class cameraManager : MonoBehaviour
             }
         }
 
-        camera.transform.position = cameraPosition;
+
+        //  Posição Y da camera
+        if (player1.y > player2.y)
+        {
+            if (player2.y < 0 && player1.y < 0)
+            {
+                cameraPosition.y = (player1.y - player2.y) / 2;
+            }
+            else
+            {
+                cameraPosition.y = (player1.y + player2.y) / 2;
+            }
+
+        }
+        else
+        {
+            if (player2.y < 0 && player1.y < 0)
+            {
+                cameraPosition.y = (player2.y - player1.y) / 2;
+            }
+            else
+            {
+
+                cameraPosition.y = (player2.y + player1.y) / 2;
+            }
+        }
+
+        gameObjectCamera.transform.position = cameraPosition;
 
     }
 }

@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Key
 {
-    public KeyCode keyCode {get; private set;}
+    public KeyCode keyCode { get; private set; }
     public bool keySeted { get; private set; }
 
     public Key()

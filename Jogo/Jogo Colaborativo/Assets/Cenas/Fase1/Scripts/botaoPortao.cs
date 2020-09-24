@@ -4,49 +4,37 @@ using UnityEngine;
 
 public class botaoPortao : MonoBehaviour
 {
-    public GameObject portaoPrimario;
-    public GameObject portaoSecundario;
-    public int numberButao;
+    public GameObject portao;
+    public bool subir;
 
-    private bool state;
     private bool isPressed;
 
     private Vector3 positionPortaoPrimario;
-    private Vector3 positionPortaoSecundario;
 
     void Start()
     {
-        state = false;
         isPressed = false;
-        positionPortaoPrimario = portaoPrimario.transform.position;
-        positionPortaoSecundario = portaoSecundario.transform.position;
-    }
-
-    void Update()
-    {
+        positionPortaoPrimario = portao.transform.position;
     }
 
     private void pressed()
     {
-
         if (isPressed)
             return;
-        
-        if (state)
+
+        positionPortaoPrimario = portao.transform.position;
+
+        if (!subir)
         {
             positionPortaoPrimario.y -= 5.8f;
-            positionPortaoSecundario.y += 5.8f;
+
         }
         else
         {
             positionPortaoPrimario.y += 5.8f;
-            positionPortaoSecundario.y -= 5.8f;
         }
 
-        portaoPrimario.transform.position = positionPortaoPrimario;
-        portaoSecundario.transform.position = positionPortaoSecundario;
-
-        state = !state;
+        portao.transform.position = positionPortaoPrimario;
 
         isPressed = true;
     }

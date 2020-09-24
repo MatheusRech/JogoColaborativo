@@ -11,8 +11,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     public int numberPlayer;
 
-    private Rigidbody2D rigidbody;
-    private SpriteRenderer renderer;
+    private Rigidbody2D rigidbodyObject;
+    private SpriteRenderer rendererObject;
 
 
     private bool frente;
@@ -25,8 +25,8 @@ public class Player : MonoBehaviour
         DontDestroyOnLoad(this);
         loadConfig();
 
-        rigidbody = gameObject.GetComponent<Rigidbody2D>();
-        renderer = gameObject.GetComponent<SpriteRenderer>();
+        rigidbodyObject = gameObject.GetComponent<Rigidbody2D>();
+        rendererObject = gameObject.GetComponent<SpriteRenderer>();
 
         velocidade = new Vector2(0, 0);
 
@@ -56,21 +56,21 @@ public class Player : MonoBehaviour
 
         if (frente)
         {
-            velocidade.x = 1.7f;
-            renderer.flipX = false;
+            velocidade.x = 3.7f;
+            rendererObject.flipX = false;
         }
         else if (tras)
         {
-            velocidade.x = -1.7f;
-            renderer.flipX = true;
+            velocidade.x = -3.7f;
+            rendererObject.flipX = true;
         }
 
-        if(ground && Input.GetKeyUp(config.pular.keyCode))
+        if(ground && Input.GetKeyDown(config.pular.keyCode))
         {
-            velocidade.y = 280;
+            velocidade.y = 400;
         }
 
-        rigidbody.AddForce(velocidade);
+        rigidbodyObject.AddForce(velocidade);
     }
 
     public void setConfig(Config config)
@@ -80,71 +80,12 @@ public class Player : MonoBehaviour
 
     public void loadConfig()
     {
-        string path = Application.dataPath + "/Config/";
-
-        DirectoryInfo directory = new DirectoryInfo(path);
-
-        if(directory.GetFiles().Length > 0)
-        {
-            foreach (FileInfo file in directory.GetFiles())
-            {
-                if(file.Name == "Config" + this.numberPlayer.ToString() + ".JSON")
-                {
-                    using (StreamReader sr = File.OpenText(file.FullName))
-                    {
-                        string json = "";
-                        string s = "";
-                        while ((s = sr.ReadLine()) != null)
-                        {
-                            json += s;
-                        }
-
-                        Debug.Log(json);
-
-                        this.config = JsonUtility.FromJson<Config>(json);
-
-                        return;
-                    }
-
-
-                }
-
-            }
-
-            this.config = Config.defaultConfig(numberPlayer);
-
-        }
-        else
-        {
-            this.config = Config.defaultConfig(numberPlayer);
-        }
+        this.config = Config.loadConfig(numberPlayer);
     }
 
     public void saveConfig()
     {
-        string fileName = Application.dataPath + "/Config/Config" + this.numberPlayer.ToString() + ".JSON";
-
-        string json = JsonUtility.ToJson(config);
-
-        try
-        {    
-            if (File.Exists(fileName))
-            {
-                File.Delete(fileName);
-            }
-
-            using (StreamWriter sw = File.CreateText(fileName))
-            {
-                Debug.Log(json);
-
-                sw.WriteLine(json);
-            }
-
-        }
-        catch (Exception Ex)
-        {
-            Debug.LogError(Ex.ToString());
-        }
+        this.config.saveConfig(this.numberPlayer);
     }
 
     private void OnCollisionEnter2D(Collision2D colidor)

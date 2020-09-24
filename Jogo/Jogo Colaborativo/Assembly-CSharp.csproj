@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Assets\Cenas\Fase1\Scripts\BotaoSequenciaSecundario.cs" />
     <Compile Include="Assets\Cenas\Fase1\Scripts\Configurador.cs" />
+    <Compile Include="Assets\Cenas\Fase1\Scripts\Elevador.cs" />
     <Compile Include="Assets\Cenas\Fase1\Scripts\botaoCaixa.cs" />
     <Compile Include="Assets\Cenas\Fase1\Scripts\botaoDeAltaPressao.cs" />
     <Compile Include="Assets\Cenas\Fase1\Scripts\botaoPortao.cs" />
