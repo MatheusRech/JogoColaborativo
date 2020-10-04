@@ -92,10 +92,15 @@ public class Config
 
     public static Config loadConfig(int numberPlayer)
     {
+
         string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\JogoColaborativo\\Config" + numberPlayer.ToString() + ".txt";
+
+        Debug.Log(path);
+
 
         if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\JogoColaborativo\\"))
         {
+            Debug.Log("Criando");
             Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\JogoColaborativo\\");
         }
 
@@ -140,8 +145,10 @@ public class Config
 
             return config;
         }
-        catch (Exception)
+        catch (Exception e)
         {
+            Debug.Log("Merda");
+            Debug.Log(e.Message);
             return defaultConfig(numberPlayer);
         }
         
