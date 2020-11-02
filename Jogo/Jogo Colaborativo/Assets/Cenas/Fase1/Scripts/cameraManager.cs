@@ -33,10 +33,13 @@ public class cameraManager : MonoBehaviour
 
 
         //  Distancia da camera
-        float size = player1.x - player2.x;
+        float sizex = player1.x - player2.x;
+
+        float sizey = player1.y - player2.y;
+        float size = sizex + sizey;
 
         if (size < 0)
-            size = size * -1;
+            size = (sizex * -1) + (sizey * -1);
 
         objetoCamera.orthographicSize = size;
 

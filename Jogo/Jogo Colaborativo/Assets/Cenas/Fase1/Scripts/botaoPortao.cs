@@ -23,6 +23,8 @@ public class botaoPortao : MonoBehaviour
             return;
 
         positionPortaoPrimario = portao.transform.position;
+        gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 0.39f, gameObject.transform.position.z);
+
 
         if (!subir)
         {
@@ -35,16 +37,29 @@ public class botaoPortao : MonoBehaviour
         }
 
         portao.transform.position = positionPortaoPrimario;
-
         isPressed = true;
     }
 
 
-    private void OnCollisionEnter2D(Collision2D colidor)
+    private void OnCollisionEnter2D(Collision2D colisor)
     {
-        if(colidor.gameObject.tag == "Player1" || colidor.gameObject.tag == "Player2")
+
+        List<ContactPoint2D> lista = new List<ContactPoint2D>();
+
+        colisor.GetContacts(lista);
+
+        foreach (ContactPoint2D hitPos in lista)
         {
-            pressed();
+            if (hitPos.normal.y < 0)
+            {
+                if (colisor.gameObject.tag == "Player1" || colisor.gameObject.tag == "Player2")
+                {
+                    pressed(); ;
+                }
+
+                //Em cima
+            }
+
         }
     }
 }

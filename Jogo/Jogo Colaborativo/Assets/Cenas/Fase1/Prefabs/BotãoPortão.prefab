@@ -71,8 +71,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ea6b340302517940869e243893b6b0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portaoPrimario: {fileID: 0}
-  portaoSecundario: {fileID: 0}
+  portao: {fileID: 0}
+  subir: 0
 --- !u!1 &3157491166267183349
 GameObject:
   m_ObjectHideFlags: 0

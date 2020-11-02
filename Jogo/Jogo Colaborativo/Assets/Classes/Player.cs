@@ -2,14 +2,15 @@
 using UnityEngine;
 using System;
 using System.Text;
-
+using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField]
     public Config config;
-    [SerializeField]
     public int numberPlayer;
+
+    private GameObject BoxFala;
 
     private Rigidbody2D rigidbodyObject;
     private SpriteRenderer rendererObject;
@@ -22,6 +23,8 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        BoxFala = gameObject.transform.GetChild(0).gameObject;
+        BoxFala.SetActive(false);
         DontDestroyOnLoad(this);
         loadConfig();
 
@@ -90,12 +93,11 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D colidor)
     {
-        if(colidor.gameObject.tag == "Plataforma" || colidor.gameObject.tag == "Botão")
+        if (colidor.gameObject.tag == "Plataforma" || colidor.gameObject.tag == "Botão")
         {
             ground = true;
         }
     }
-
 
     private void OnCollisionExit2D(Collision2D colidor)
     {
@@ -103,5 +105,16 @@ public class Player : MonoBehaviour
         {
             ground = false;
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D colisor)
+    {
+        BoxFala.SetActive(true);
+        BoxFala.transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text = colisor.GetComponent<TutorialMensagem>().mensagem;
+    }
+
+    private void OnTriggerExit2D(Collider2D colisor)
+    {
+        BoxFala.SetActive(false);
     }
 }
