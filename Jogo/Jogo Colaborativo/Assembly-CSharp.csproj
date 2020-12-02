@@ -73,6 +73,7 @@
     <Compile Include="Assets\Cenas\Fase1\Scripts\botaoPortao.cs" />
     <Compile Include="Assets\Cenas\Fase1\Scripts\botaoSequencia.cs" />
     <Compile Include="Assets\Cenas\Fase1\Scripts\cameraManager.cs" />
+    <Compile Include="Assets\Cenas\Fase2\Scripts\BotaoEscada.cs" />
     <Compile Include="Assets\Cenas\MainMenu\Scripts\AlterCanvas.cs" />
     <Compile Include="Assets\Cenas\MainMenu\Scripts\AlterPanelConfig.cs" />
     <Compile Include="Assets\Cenas\MainMenu\Scripts\ConfigControls.cs" />

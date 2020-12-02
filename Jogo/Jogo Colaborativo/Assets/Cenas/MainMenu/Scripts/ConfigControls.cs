@@ -11,6 +11,17 @@ public class ConfigControls : MonoBehaviour
 
     public List<GameObject> botoes;
 
+    public Text warning;
+
+    public Sprite[] imagensBotoes;
+
+    private enum teclaEscolha
+    {
+        Pular,
+        Frente,
+        Tras
+    }
+
     private Config config1;
     private Config config2;
 
@@ -28,6 +39,9 @@ public class ConfigControls : MonoBehaviour
 
         config1 = new Config();
         config2 = new Config();
+
+        warning.text = "";
+
     }
 
     void Update()
@@ -61,107 +75,196 @@ public class ConfigControls : MonoBehaviour
             {
                 if (Input.GetKey(vKey))
                 {
-                    keyPressed = new Key(vKey);
+                    if(vKey != KeyCode.Escape)
+                    {
+                        if(vKey == config1.paraFrente.keyCode || vKey == config1.paraTras.keyCode || vKey == config1.pular.keyCode || vKey == config2.paraFrente.keyCode || vKey == config2.paraTras.keyCode || vKey == config2.pular.keyCode)
+                        {
+                            pular = false;
+                            paraFrente = false;
+                            paraTras = false;
+                            warning.text = "A tecla selecionada já está atribuida a alguma função";
+                        }
+                        else
+                        {
+                            keyPressed = new Key(vKey);
+                            warning.text = "Tecla selecionada pressione o botão de salvar para gravar a configuração";
+                        }  
+                        
+                    }
+                    else
+                    {
+                        pular = false;
+                        paraFrente = false;
+                        paraTras = false;
+                        warning.text = "Ação cancelada";
+                    }
                 }
             }
 
             if (pular && keyPressed.keySeted)
             {
-                switch (GameObject.Find("SeletorJogador").GetComponent<Dropdown>().value)
-                {
-                    case 0:
-                        config1.setKeyPular(keyPressed);
-                        foreach (GameObject botao in botoes)
-                        {
-                            if (botao.name == "Pular")
-                            {
-                                botao.transform.Find("Valor").GetComponent<Text>().text = config1.pular.keyCode.ToString();
-                            }
-                        }
-                        break;
-                    case 1:
-                        config2.setKeyPular(keyPressed);
-                        foreach (GameObject botao in botoes)
-                        {
-                            if (botao.name == "Pular")
-                            {
-                                botao.transform.Find("Valor").GetComponent<Text>().text = config2.pular.keyCode.ToString();
-                            }
-                        }
-                        break;
-                }
+                changeTecla("Pular", teclaEscolha.Pular);
                 pular = false;
             }
             else if (paraFrente && keyPressed.keySeted)
             {
-                switch (GameObject.Find("SeletorJogador").GetComponent<Dropdown>().value)
-                {
-                    case 0:
-                        config1.setKeyFrente(keyPressed);
-                        foreach (GameObject botao in botoes)
-                        {
-                            if (botao.name == "AndarParaFrente")
-                            {
-                                botao.transform.Find("Valor").GetComponent<Text>().text = config1.paraFrente.keyCode.ToString();
-                            }
-                        }
-                        break;
-                    case 1:
-                        config2.setKeyFrente(keyPressed);
-                        foreach (GameObject botao in botoes)
-                        {
-                            if (botao.name == "AndarParaFrente")
-                            {
-                                botao.transform.Find("Valor").GetComponent<Text>().text = config2.paraFrente.keyCode.ToString();
-                            }
-                        }
-                        break;
-                }
-
+                changeTecla("AndarParaFrente", teclaEscolha.Frente);
                 paraFrente = false;
             }
             else if (paraTras && keyPressed.keySeted)
             {
-                switch (GameObject.Find("SeletorJogador").GetComponent<Dropdown>().value)
-                {
-                    case 0:
-                        config1.setKeyTras(keyPressed);
-                        foreach (GameObject botao in botoes)
-                        {
-                            if (botao.name == "AndarParaTras")
-                            {
-                                botao.transform.Find("Valor").GetComponent<Text>().text = config1.paraTras.keyCode.ToString();
-                            }
-                        }
-                        break;
-                    case 1:
-                        config2.setKeyTras(keyPressed);
-                        foreach (GameObject botao in botoes)
-                        {
-                            if (botao.name == "AndarParaTras")
-                            {
-                                botao.transform.Find("Valor").GetComponent<Text>().text = config1.paraTras.keyCode.ToString();
-                            }
-                        }
-                        break;
-                }
-
+                changeTecla("AndarParaTras", teclaEscolha.Tras);
                 paraTras = false;
             }
+        }
+    }
+
+    private void changeTecla(string nomeBotao, teclaEscolha opcao)
+    {
+        switch (GameObject.Find("SeletorJogador").GetComponent<Dropdown>().value)
+        {
+            case 0:
+                if (opcao == teclaEscolha.Pular)
+                {
+                    config1.setKeyPular(keyPressed);
+                }
+                else if (opcao == teclaEscolha.Frente)
+                {
+                    config1.setKeyFrente(keyPressed);
+                }
+                else if (opcao == teclaEscolha.Tras)
+                {
+                    config1.setKeyTras(keyPressed);
+                }
+
+                foreach (GameObject botao in botoes)
+                {
+                    if (botao.name == nomeBotao)
+                    {
+                        Sprite imagemBotao = null;
+
+                        if (keyPressed.keyCode.ToString().Contains("Joystick"))
+                        {
+                            string name = keyPressed.keyCode.ToString();
+
+                            foreach(string a in Input.GetJoystickNames())
+                            {
+                                Debug.Log(a);
+                            }
+
+                            if (Input.GetJoystickNames()[int.Parse(name[8].ToString()) - 1] == "Controller (Xbox One For Windows)")
+                            {
+                                Debug.Log("XBOX");
+                                switch (name.Substring(name.Length - 1))
+                                {
+                                    case "0":
+                                        imagemBotao = imagensBotoes[0];
+                                        break;
+                                    case "1":
+                                        imagemBotao = imagensBotoes[1];
+                                        break;
+                                    case "2":
+                                        imagemBotao = imagensBotoes[2];
+                                        break;
+                                    case "3":
+                                        imagemBotao = imagensBotoes[3];
+                                        break;
+                                }
+                            }
+                        }
+                        if (imagemBotao != null)
+                        {
+                            botao.transform.Find("Imagem").GetComponent<Image>().color = new Color(255, 255, 255, 255);
+                            botao.transform.Find("Imagem").GetComponent<Image>().sprite = imagemBotao;
+                            botao.transform.Find("Valor").GetComponent<Text>().text = "";
+                        }
+                        else
+                        {
+                            botao.transform.Find("Imagem").GetComponent<Image>().color = new Color(255, 255, 255, 0);
+                            botao.transform.Find("Valor").GetComponent<Text>().text = keyPressed.keyCode.ToString();
+                        }
+
+                    }
+                }
+                break;
+            case 1:
+
+                if (opcao == teclaEscolha.Pular)
+                {
+                    config2.setKeyPular(keyPressed);
+                }
+                else if (opcao == teclaEscolha.Frente)
+                {
+                    config2.setKeyFrente(keyPressed);
+                }
+                else if (opcao == teclaEscolha.Tras)
+                {
+                    config2.setKeyTras(keyPressed);
+                }
+
+                foreach (GameObject botao in botoes)
+                {
+                    if (botao.name == nomeBotao)
+                    {
+                        Sprite imagemBotao = null;
+
+                        if (keyPressed.keyCode.ToString().Contains("Joystick"))
+                        {
+                            string name = keyPressed.keyCode.ToString();
+
+                            if (Input.GetJoystickNames()[int.Parse(name.Substring(8)) + 1] == "Controller (Xbox One For Windows)")
+                            {
+                                Debug.Log("XBOX");
+                                switch (name.Substring(name.Length - 1))
+                                {
+                                    case "1":
+                                        imagemBotao = imagensBotoes[0];
+                                        break;
+                                    case "2":
+                                        imagemBotao = imagensBotoes[1];
+                                        break;
+                                    case "3":
+                                        imagemBotao = imagensBotoes[2];
+                                        break;
+                                    case "4":
+                                        imagemBotao = imagensBotoes[3];
+                                        break;
+                                }
+                            }
+                        }
+                        if (imagemBotao != null)
+                        {
+                            botao.transform.Find("Imagem").GetComponent<Image>().color = new Color(255, 255, 255, 255);
+                            botao.transform.Find("Imagem").GetComponent<Image>().sprite = imagemBotao;
+                            botao.transform.Find("Valor").GetComponent<Text>().text = "";
+                        }
+                        else
+                        {
+                            botao.transform.Find("Imagem").GetComponent<Image>().color = new Color(255, 255, 255, 0);
+                            botao.transform.Find("Valor").GetComponent<Text>().text = keyPressed.keyCode.ToString();
+                        }
+
+
+                    }
+                }
+                break;
         }
     }
 
     public void configAndarParaFrente()
     {
         paraFrente = true;
+        warning.text = "Pressione algum botão para andar para frente ou a tecla ESC para cancelar";
     }
     public void configAndarParaTras()
     {
         paraTras = true;
+        warning.text = "Pressione algum botão para andar para tras ou a tecla ESC para cancelar";
     }
     public void configPular()
     {
         pular = true;
+        warning.text = "Pressione algum botão para pular ou a tecla ESC para cancelar";
     }
 
 

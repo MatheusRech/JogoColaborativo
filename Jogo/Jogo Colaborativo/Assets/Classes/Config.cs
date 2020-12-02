@@ -147,7 +147,6 @@ public class Config
         }
         catch (Exception e)
         {
-            Debug.Log("Merda");
             Debug.Log(e.Message);
             return defaultConfig(numberPlayer);
         }
