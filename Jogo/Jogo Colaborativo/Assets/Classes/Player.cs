@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    public int teste;
+
     public Config config;
     public int numberPlayer;
 
@@ -39,38 +41,51 @@ public class Player : MonoBehaviour
     void Update()
     {
         velocidade = new Vector2(0, 0);
+        if (!config.modoJoystick)
+        {
+            if (Input.GetKeyDown(config.paraFrente.keyCode))
+            {
+                frente = true;
+            }
+            else if (Input.GetKeyUp(config.paraFrente.keyCode))
+            {
+                frente = false;
+            }
 
-        if (Input.GetKeyDown(config.paraFrente.keyCode))
-        {
-            frente = true;
-        }else if (Input.GetKeyUp(config.paraFrente.keyCode))
-        {
-            frente = false;
-        }
+            if (Input.GetKeyDown(config.paraTras.keyCode))
+            {
+                tras = true;
+            }
+            else if (Input.GetKeyUp(config.paraTras.keyCode))
+            {
+                tras = false;
+            }
 
-        if (Input.GetKeyDown(config.paraTras.keyCode))
-        {
-            tras = true;
+            if (frente)
+            {
+                velocidade.x = 3.7f;
+                rendererObject.flipX = false;
+            }
+            else if (tras)
+            {
+                velocidade.x = -3.7f;
+                rendererObject.flipX = true;
+            }
         }
-        else if (Input.GetKeyUp(config.paraTras.keyCode))
+        else
         {
-            tras = false;
+            velocidade.x = Input.GetAxis("Joy" + config.joystickSelection.ToString());
         }
-
-        if (frente)
-        {
-            velocidade.x = 3.7f;
-            rendererObject.flipX = false;
-        }
-        else if (tras)
-        {
-            velocidade.x = -3.7f;
-            rendererObject.flipX = true;
-        }
+        
 
         if(ground && Input.GetKeyDown(config.pular.keyCode))
         {
             velocidade.y = 400;
+        }
+
+        if (Input.GetKeyDown(config.interacao.keyCode))
+        {
+            // Criar função de interação com objetos
         }
 
         rigidbodyObject.AddForce(velocidade);

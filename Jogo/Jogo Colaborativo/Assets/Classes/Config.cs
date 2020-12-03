@@ -11,11 +11,17 @@ public class Config
 
     public Key pular { get; private set; }
 
+    public Key interacao { get; private set; }
+
     public float volumePrincipal { get; private set; }
 
     public float volumeMusica { get; private set; }
 
     public float volumeEfx { get; private set; }
+
+    public bool modoJoystick { get; private set; }
+
+    public int joystickSelection { get; private set; }
 
     void Start()
     {
@@ -42,6 +48,16 @@ public class Config
         this.volumeEfx = volume;
     }
 
+    public void setModeJoystick(bool mode)
+    {
+        this.modoJoystick = mode;
+    }
+
+    public void setJoystick(int joystick)
+    {
+        this.joystickSelection = joystick;
+    }
+
     public void setKeyFrente(Key key)
     {
         if (key.keySeted)
@@ -66,21 +82,34 @@ public class Config
         }
     }
 
+    public void setKeyInteracao(Key key)
+    {
+        if (key.keySeted)
+        {
+            interacao = key;
+        }
+    }
+
     public static Config defaultConfig(int numberplayer)
     {
         Config defaultConfiguration = new Config();
+
+        defaultConfiguration.setModeJoystick(false);
 
         if(numberplayer == 1)
         {
             defaultConfiguration.setKeyFrente(new Key(KeyCode.D));
             defaultConfiguration.setKeyTras(new Key(KeyCode.A));
             defaultConfiguration.setKeyPular(new Key(KeyCode.W));
+            defaultConfiguration.setKeyInteracao(new Key(KeyCode.J));
+            
         }
         else
         {
             defaultConfiguration.setKeyFrente(new Key(KeyCode.Keypad6));
             defaultConfiguration.setKeyTras(new Key(KeyCode.Keypad4));
             defaultConfiguration.setKeyPular(new Key(KeyCode.Keypad8));
+            defaultConfiguration.setKeyInteracao(new Key(KeyCode.Keypad0));
         }
 
         defaultConfiguration.setVolumePrincipal(100);
@@ -132,12 +161,17 @@ public class Config
                         config.setKeyPular(tecla);
                         break;
                     case 3:
-                        config.setVolumePrincipal(float.Parse(lines[x]));
+                        key = (KeyCode)int.Parse(lines[x]);
+                        tecla = new Key(key);
+                        config.setKeyInteracao(tecla);
                         break;
                     case 4:
-                        config.setVolumeMusica(float.Parse(lines[x]));
+                        config.setVolumePrincipal(float.Parse(lines[x]));
                         break;
                     case 5:
+                        config.setVolumeMusica(float.Parse(lines[x]));
+                        break;
+                    case 6:
                         config.setVolumeEfx(float.Parse(lines[x]));
                         break;
                 }
@@ -167,7 +201,7 @@ public class Config
         {
             FileStream file = new FileStream(path, FileMode.Create);
 
-            byte[] texto = System.Text.Encoding.UTF8.GetBytes(((int)paraFrente.keyCode).ToString() + "\n" + ((int)paraTras.keyCode).ToString() + "\n" + ((int)pular.keyCode).ToString() + "\n" + volumePrincipal.ToString() + "\n" + volumeMusica.ToString() + "\n" + volumeEfx.ToString());
+            byte[] texto = System.Text.Encoding.UTF8.GetBytes(((int)paraFrente.keyCode).ToString() + "\n" + ((int)paraTras.keyCode).ToString() + "\n" + ((int)pular.keyCode).ToString() + "\n" + ((int)interacao.keyCode).ToString() + "\n" + volumePrincipal.ToString() + "\n" + volumeMusica.ToString() + "\n" + volumeEfx.ToString());
 
             file.Write(texto, 0, texto.Length);
 

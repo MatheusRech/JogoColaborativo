@@ -19,7 +19,8 @@ public class ConfigControls : MonoBehaviour
     {
         Pular,
         Frente,
-        Tras
+        Tras,
+        Interacao
     }
 
     private Config config1;
@@ -28,6 +29,7 @@ public class ConfigControls : MonoBehaviour
     private bool pular;
     private bool paraFrente;
     private bool paraTras;
+    private bool interacao;
 
     private Key keyPressed;
 
@@ -67,7 +69,7 @@ public class ConfigControls : MonoBehaviour
 
         }
 
-        if(pular || paraFrente || paraTras)
+        if(pular || paraFrente || paraTras || interacao)
         {
             keyPressed = new Key();
 
@@ -82,12 +84,12 @@ public class ConfigControls : MonoBehaviour
                             pular = false;
                             paraFrente = false;
                             paraTras = false;
-                            warning.text = "A tecla selecionada já está atribuida a alguma função";
+                            warning.text = "A tecla selecionada já está atribuida a alguma função.";
                         }
                         else
                         {
                             keyPressed = new Key(vKey);
-                            warning.text = "Tecla selecionada pressione o botão de salvar para gravar a configuração";
+                            warning.text = "Tecla selecionada pressione o botão de salvar para gravar a configuração.";
                         }  
                         
                     }
@@ -96,7 +98,7 @@ public class ConfigControls : MonoBehaviour
                         pular = false;
                         paraFrente = false;
                         paraTras = false;
-                        warning.text = "Ação cancelada";
+                        warning.text = "Ação cancelada.";
                     }
                 }
             }
@@ -115,6 +117,11 @@ public class ConfigControls : MonoBehaviour
             {
                 changeTecla("AndarParaTras", teclaEscolha.Tras);
                 paraTras = false;
+            }
+            else if(interacao && keyPressed.keySeted)
+            {
+                changeTecla("InteraçãoObjetos", teclaEscolha.Interacao);
+                interacao = false;
             }
         }
     }
@@ -135,6 +142,10 @@ public class ConfigControls : MonoBehaviour
                 else if (opcao == teclaEscolha.Tras)
                 {
                     config1.setKeyTras(keyPressed);
+                }
+                else if(opcao == teclaEscolha.Interacao)
+                {
+                    config1.setKeyInteracao(keyPressed);
                 }
 
                 foreach (GameObject botao in botoes)
@@ -201,6 +212,10 @@ public class ConfigControls : MonoBehaviour
                 {
                     config2.setKeyTras(keyPressed);
                 }
+                else if (opcao == teclaEscolha.Interacao)
+                {
+                    config2.setKeyInteracao(keyPressed);
+                }
 
                 foreach (GameObject botao in botoes)
                 {
@@ -254,17 +269,23 @@ public class ConfigControls : MonoBehaviour
     public void configAndarParaFrente()
     {
         paraFrente = true;
-        warning.text = "Pressione algum botão para andar para frente ou a tecla ESC para cancelar";
+        warning.text = "Pressione algum botão que fará o personagem andar para frente ou a tecla ESC para cancelar.";
     }
     public void configAndarParaTras()
     {
         paraTras = true;
-        warning.text = "Pressione algum botão para andar para tras ou a tecla ESC para cancelar";
+        warning.text = "Pressione algum botão que fará o personagem andar para tras ou a tecla ESC para cancelar.";
     }
     public void configPular()
     {
         pular = true;
-        warning.text = "Pressione algum botão para pular ou a tecla ESC para cancelar";
+        warning.text = "Pressione algum botão que fará o personagem pular ou a tecla ESC para cancelar.";
+    }
+
+    public void configInteracao()
+    {
+        interacao = true;
+        warning.text = "Pressione algum botão que fará o personagem interagir com objetos ou a tecla ESC para cancelar.";
     }
 
 
@@ -298,6 +319,12 @@ public class ConfigControls : MonoBehaviour
                         case "AndarParaFrente":
                             objeto.transform.Find("Valor").GetComponent<Text>().text = config1.paraFrente.keyCode.ToString();
                             break;
+                        case "InteraçãoObjetos":
+                            objeto.transform.Find("Valor").GetComponent<Text>().text = config1.interacao.keyCode.ToString();
+                            break;
+                        case "ModoJoystick":
+                            objeto.GetComponent<Toggle>().SetIsOnWithoutNotify(config1.modoJoystick);
+                            break;
                     }
                 }
                 break;
@@ -327,10 +354,18 @@ public class ConfigControls : MonoBehaviour
                         case "AndarParaFrente":
                             objeto.transform.Find("Valor").GetComponent<Text>().text = config2.paraFrente.keyCode.ToString();
                             break;
+                        case "InteraçãoObjetos":
+                            objeto.transform.Find("Valor").GetComponent<Text>().text = config2.interacao.keyCode.ToString();
+                            break;
+                        case "ModoJoystick":
+                            objeto.GetComponent<Toggle>().SetIsOnWithoutNotify(config2.modoJoystick);
+                            break;
                     }
                 }
                 break;
         }
+
+        GameObject.Find("JoystickSelection").GetComponent<Dropdown>().value = 0;
     }
 
     public void salvar()
@@ -348,6 +383,36 @@ public class ConfigControls : MonoBehaviour
         }
     }
 
+    public void onJoystickModeSet()
+    {
+        warning.text = "Após você alterar está configuração os controles do personagem só iram funcionar no Joystick.";
+        if (GameObject.Find("SeletorJogador").GetComponent<Dropdown>().value == 0)
+        {
+            config1.setModeJoystick(GameObject.Find("ModoJoystick").GetComponent<Toggle>().isOn);
+        }
+        else
+        { 
+            config2.setModeJoystick(GameObject.Find("ModoJoystick").GetComponent<Toggle>().isOn);
+        }
+    }
+
+    public void onJoystickSelect()
+    {
+        if (GameObject.Find("JoystickSelection").GetComponent<Dropdown>().value == 0)
+            return;
+
+
+        warning.text = "Joystick selecionado.";
+        if (GameObject.Find("SeletorJogador").GetComponent<Dropdown>().value == 0)
+        {
+            config1.setJoystick(GameObject.Find("JoystickSelection").GetComponent<Dropdown>().value);
+        }
+        else
+        {
+            config2.setJoystick(GameObject.Find("JoystickSelection").GetComponent<Dropdown>().value);
+        }
+    }
+
     public void carregarConfig()
     {
         player1.loadConfig();
@@ -356,32 +421,13 @@ public class ConfigControls : MonoBehaviour
         config1 = player1.config;
         config2 = player2.config;
 
-        foreach (GameObject objeto in botoes)
+        setPlayer();
+
+        GameObject joytisckSelection = GameObject.Find("JoystickSelection");
+
+        foreach (string joystick in Input.GetJoystickNames())
         {
-            switch (objeto.name)
-            {
-                case "VolumePrincipal":
-                    objeto.GetComponent<Scrollbar>().value = config1.volumePrincipal;
-                    objeto.transform.Find("Valor").GetComponent<Text>().text = config1.volumePrincipal.ToString();
-                    break;
-                case "VolumeMusica":
-                    objeto.GetComponent<Scrollbar>().value = config1.volumeMusica;
-                    objeto.transform.Find("Valor").GetComponent<Text>().text = config1.volumeMusica.ToString();
-                    break;
-                case "VolumeEfeitosEspecias":
-                    objeto.GetComponent<Scrollbar>().value = config1.volumeEfx;
-                    objeto.transform.Find("Valor").GetComponent<Text>().text = config1.volumeEfx.ToString();
-                    break;
-                case "Pular":
-                    objeto.transform.Find("Valor").GetComponent<Text>().text = config1.pular.keyCode.ToString();
-                    break;
-                case "AndarParaTras":
-                    objeto.transform.Find("Valor").GetComponent<Text>().text = config1.paraTras.keyCode.ToString();
-                    break;
-                case "AndarParaFrente":
-                    objeto.transform.Find("Valor").GetComponent<Text>().text = config1.paraFrente.keyCode.ToString();
-                    break;
-            }
+            joytisckSelection.GetComponent<Dropdown>().options.Add(new Dropdown.OptionData(joystick));
         }
     }
 }
