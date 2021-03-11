@@ -18,16 +18,24 @@ public class BotaoEscada : MonoBehaviour
     {
         if (modo)
         {
-            if(alturaMaxima >= elevador.transform.position.y)
+            if (!(alturaMaxima >= (elevador.transform.position.y)+ 1.5))
             {
-                elevador.transform.position = new Vector3(elevador.transform.position.x, elevador.transform.position.y, elevador.transform.position.z);
+                elevador.transform.position = new Vector3(elevador.transform.position.x, elevador.transform.position.y + 1.5f, elevador.transform.position.z);
+            }
+            else
+            {
+                elevador.transform.position = new Vector3(elevador.transform.position.x, float.Parse(alturaMaxima.ToString()), elevador.transform.position.z);
             }
         }
         else
         {
-            if (alturaMinima <= elevador.transform.position.y)
+            if (!(alturaMinima <= (elevador.transform.position.y - 1.5)))
             {
-                elevador.transform.position = new Vector3(elevador.transform.position.x, elevador.transform.position.y, elevador.transform.position.z);
+                elevador.transform.position = new Vector3(elevador.transform.position.x, elevador.transform.position.y - 1.5f, elevador.transform.position.z);
+            }
+            else
+            {
+                elevador.transform.position = new Vector3(elevador.transform.position.x, float.Parse(alturaMaxima.ToString()), elevador.transform.position.z);
             }
         }
     }
@@ -45,6 +53,7 @@ public class BotaoEscada : MonoBehaviour
                 if (colisor.gameObject.tag == "Player1" || colisor.gameObject.tag == "Player2")
                 {
                     pressed();
+                    return;
                 }
 
                 //Em cima
