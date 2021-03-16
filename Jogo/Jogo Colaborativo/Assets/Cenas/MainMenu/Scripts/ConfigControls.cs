@@ -364,8 +364,6 @@ public class ConfigControls : MonoBehaviour
                 }
                 break;
         }
-
-        GameObject.Find("JoystickSelection").GetComponent<Dropdown>().value = 0;
     }
 
     public void salvar()

@@ -5,6 +5,7 @@ public class AlterPanelConfig : MonoBehaviour
 {
     private GameObject configAudio;
     private GameObject configControle;
+    private GameObject configCor;
 
     private int panelAtivo;
     void Start()
@@ -15,6 +16,8 @@ public class AlterPanelConfig : MonoBehaviour
 
             configAudio = GameObject.Find("AudioPanel");
             configControle = GameObject.Find("ControlePanel");
+            configCor = GameObject.Find("ColorPanel");
+            configCor.SetActive(false);
             configControle.SetActive(false);
             gameObject.GetComponent<AlterCanvas>().closeCanvasConfig();
         }
@@ -36,13 +39,21 @@ public class AlterPanelConfig : MonoBehaviour
             case 0:
                 configAudio.SetActive(true);
                 configControle.SetActive(false);
+                configCor.SetActive(false);
                 panelAtivo = 0;
                 break;
             case 1:
                 configAudio.SetActive(false);
                 configControle.SetActive(true);
+                configCor.SetActive(false);
                 gameObject.GetComponent<ConfigControls>().carregarConfig();
                 panelAtivo = 1;
+                break;
+            case 2:
+                configAudio.SetActive(false);
+                configControle.SetActive(false);
+                configCor.SetActive(true);
+                panelAtivo = 2;
                 break;
         }
     }

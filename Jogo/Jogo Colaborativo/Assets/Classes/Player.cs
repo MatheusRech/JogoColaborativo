@@ -7,8 +7,6 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public int teste;
-
     public Config config;
     public int numberPlayer;
 
@@ -16,7 +14,6 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D rigidbodyObject;
     private SpriteRenderer rendererObject;
-
 
     private bool frente;
     private bool tras;
