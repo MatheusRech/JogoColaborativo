@@ -15,28 +15,33 @@ public class RgbColorPicker : MonoBehaviour
     private string valorGreen;
     private string valorBlue;
 
-    void Start()
+    void reload(string nomeObjeto)
     {
-        red = GameObject.Find("CorVermelhaPersonagem");
-        green = GameObject.Find("CorVerdePersonagem");
-        blue = GameObject.Find("CorAzulPersonagem");
-        preview = GameObject.Find("PreviewColorPersonagem").GetComponent<Image>();
-        valorRed = "0";
-        valorGreen = "0";
-        valorBlue = "0";
-        alterPreviw();
-}
+        red = GameObject.Find("CorVermelha" + nomeObjeto);
+        green = GameObject.Find("CorVerde" + nomeObjeto);
+        blue = GameObject.Find("CorAzul" + nomeObjeto);
+        preview = GameObject.Find("PreviewColor" + nomeObjeto).GetComponent<Image>();
 
-    public void setRed()
+        valorRed = valorRed = Math.Round((red.GetComponent<Scrollbar>().value * 255), MidpointRounding.AwayFromZero).ToString();
+        valorGreen = Math.Round((green.GetComponent<Scrollbar>().value * 255), MidpointRounding.AwayFromZero).ToString();
+        valorBlue = Math.Round((blue.GetComponent<Scrollbar>().value * 255), MidpointRounding.AwayFromZero).ToString();
+        alterPreviw();
+    }
+
+    public void setRed(string nomeObjeto)
     {
+        reload(nomeObjeto);
+
         valorRed = Math.Round((red.GetComponent<Scrollbar>().value * 255), MidpointRounding.AwayFromZero).ToString();
 
         red.transform.GetChild(2).gameObject.GetComponent<Text>().text = valorRed;
 
         alterPreviw();
     }
-    public void setGreen()
+    public void setGreen(string nomeObjeto)
     {
+        reload(nomeObjeto);
+
         valorGreen = Math.Round((green.GetComponent<Scrollbar>().value * 255), MidpointRounding.AwayFromZero).ToString();
 
         green.transform.GetChild(2).gameObject.GetComponent<Text>().text = valorGreen;
@@ -44,8 +49,10 @@ public class RgbColorPicker : MonoBehaviour
         alterPreviw();
     }
 
-    public void setBlue()
+    public void setBlue(string nomeObjeto)
     {
+        reload(nomeObjeto);
+
         valorBlue = Math.Round((blue.GetComponent<Scrollbar>().value * 255), MidpointRounding.AwayFromZero).ToString();
 
         blue.transform.GetChild(2).gameObject.GetComponent<Text>().text = valorBlue;
