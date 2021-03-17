@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     {
         BoxFala = gameObject.transform.GetChild(0).gameObject;
         BoxFala.SetActive(false);
+        //DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(this);
         loadConfig();
 

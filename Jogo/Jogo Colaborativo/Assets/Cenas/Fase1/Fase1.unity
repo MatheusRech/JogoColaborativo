@@ -1240,6 +1240,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Plataforma
       objectReference: {fileID: 0}
+    - target: {fileID: 3438795513066323546, guid: 2f3b6ddd7e2b7744aaf9ba5868aa4f9f,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.990566
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438795513066323546, guid: 2f3b6ddd7e2b7744aaf9ba5868aa4f9f,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.990566
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438795513066323546, guid: 2f3b6ddd7e2b7744aaf9ba5868aa4f9f,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.990566
+      objectReference: {fileID: 0}
     - target: {fileID: 4197067481523101106, guid: 2f3b6ddd7e2b7744aaf9ba5868aa4f9f,
         type: 3}
       propertyPath: m_LocalPosition.x

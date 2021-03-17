@@ -22,7 +22,7 @@ public class RgbColorPicker : MonoBehaviour
         blue = GameObject.Find("CorAzul" + nomeObjeto);
         preview = GameObject.Find("PreviewColor" + nomeObjeto).GetComponent<Image>();
 
-        valorRed = valorRed = Math.Round((red.GetComponent<Scrollbar>().value * 255), MidpointRounding.AwayFromZero).ToString();
+        valorRed = Math.Round((red.GetComponent<Scrollbar>().value * 255), MidpointRounding.AwayFromZero).ToString();
         valorGreen = Math.Round((green.GetComponent<Scrollbar>().value * 255), MidpointRounding.AwayFromZero).ToString();
         valorBlue = Math.Round((blue.GetComponent<Scrollbar>().value * 255), MidpointRounding.AwayFromZero).ToString();
         alterPreviw();

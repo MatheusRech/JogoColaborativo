@@ -15,6 +15,8 @@ public class ConfigControls : MonoBehaviour
 
     public Sprite[] imagensBotoes;
 
+    public GameObject painelColor;
+
     private enum teclaEscolha
     {
         Pular,
@@ -39,8 +41,8 @@ public class ConfigControls : MonoBehaviour
         paraFrente = false;
         paraTras = false;
 
-        config1 = new Config();
-        config2 = new Config();
+        config1 = Config.defaultConfig(1);
+        config2 = Config.defaultConfig(2);
 
         warning.text = "";
 
@@ -379,6 +381,56 @@ public class ConfigControls : MonoBehaviour
                 player2.saveConfig();
                 break;
         }
+
+        bool close = false;
+
+        if(!painelColor.active){
+            close = true;
+        }
+
+        painelColor.SetActive(true);
+
+        try{
+            if(GameObject.Find("UseColor").GetComponent<Toggle>().isOn){
+                Color personagem = new Color(0,0,0);
+                Color background = new Color(0,0,0);
+                Color plataforma = new Color(0,0,0);
+                Color interacao = new Color(0,0,0);
+
+                string valorRed, valorGreen, valorBlue;
+                
+                var coresDisponiveis = new List<string> {"Personagem", "Background", "Plataforma", "Interacao"};
+
+                foreach (string item in coresDisponiveis)
+                {
+                    valorRed = Math.Round((GameObject.Find("CorVermelha" + item).GetComponent<Scrollbar>().value * 255), MidpointRounding.AwayFromZero).ToString();
+                    valorGreen = Math.Round((GameObject.Find("CorVerde" + item).GetComponent<Scrollbar>().value * 255), MidpointRounding.AwayFromZero).ToString();
+                    valorBlue = Math.Round((GameObject.Find("CorAzul" + item).GetComponent<Scrollbar>().value * 255), MidpointRounding.AwayFromZero).ToString();
+
+                    if(item == "Personagem"){
+                        personagem = new Color((float.Parse(valorRed))/255, (float.Parse(valorGreen))/255, (float.Parse(valorBlue))/255);
+                    }else if(item == "Background"){
+                        background = new Color((float.Parse(valorRed))/255, (float.Parse(valorGreen))/255, (float.Parse(valorBlue))/255);
+                    }else if(item == "Plataforma"){
+                        plataforma = new Color((float.Parse(valorRed))/255, (float.Parse(valorGreen))/255, (float.Parse(valorBlue))/255);
+                    }else{
+                        interacao = new Color((float.Parse(valorRed))/255, (float.Parse(valorGreen))/255, (float.Parse(valorBlue))/255);
+                    }
+                }
+                
+                ColorConfig cores = new ColorConfig(personagem, background, plataforma, interacao);
+
+                GameObject.Find("ConfigGame").GetComponent<ConfigGame>().setColorConfig(cores, true);
+            }
+        }catch(NullReferenceException erro){
+            Debug.Log("Objeto useColor nao foi encontrado");
+        }
+        finally{
+            if(close){
+                painelColor.SetActive(false);
+            }
+        }
+        
     }
 
     public void onJoystickModeSet()
