@@ -1045,7 +1045,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 510222452}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 1.43, y: 37.137, z: 0}
+  m_LocalPosition: {x: 179.1, y: 37.1, z: 0}
   m_LocalScale: {x: 0.50072855, y: 0.119908616, z: 1}
   m_Children:
   - {fileID: 1192114700}
@@ -3295,7 +3295,12 @@ PrefabInstance:
     - target: {fileID: 824994121179061675, guid: 75c638afedd3d9843969bc27ecefa06b,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1401975932349056858, guid: 75c638afedd3d9843969bc27ecefa06b,
+        type: 3}
+      propertyPath: mensagem
+      value: "Muito bom, agora \xE9 a segunda fase!"
       objectReference: {fileID: 0}
     - target: {fileID: 5594859474430338254, guid: 75c638afedd3d9843969bc27ecefa06b,
         type: 3}

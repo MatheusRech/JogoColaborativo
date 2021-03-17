@@ -122,8 +122,16 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D colisor)
     {
-        BoxFala.SetActive(true);
-        BoxFala.transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text = colisor.GetComponent<TutorialMensagem>().mensagem;
+        try
+        {
+            BoxFala.SetActive(true);
+            BoxFala.transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text = colisor.GetComponent<TutorialMensagem>().mensagem;
+        }
+        catch (System.Exception)
+        {
+            Debug.Log("Erro na colisao com a trigger!");
+        }
+        
     }
 
     private void OnTriggerExit2D(Collider2D colisor)

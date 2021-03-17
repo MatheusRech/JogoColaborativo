@@ -6,8 +6,8 @@ public class BotaoEscada : MonoBehaviour
 {
     public bool modo;
     public GameObject elevador;
-    public double alturaMinima;
-    public double alturaMaxima;
+    public float alturaMinima;
+    public float alturaMaxima;
 
     void Start()
     {
@@ -16,26 +16,24 @@ public class BotaoEscada : MonoBehaviour
 
     public void pressed()
     {
-        if (modo)
-        {
-            if (!(alturaMaxima >= (elevador.transform.position.y)+ 1.5))
-            {
-                elevador.transform.position = new Vector3(elevador.transform.position.x, elevador.transform.position.y + 1.5f, elevador.transform.position.z);
-            }
-            else
-            {
-                elevador.transform.position = new Vector3(elevador.transform.position.x, float.Parse(alturaMaxima.ToString()), elevador.transform.position.z);
+        Debug.Log(modo);
+
+        if(modo){
+            elevador.transform.position = elevador.transform.position + new Vector3(0,1.5f,0);
+
+            if(elevador.transform.position.y > alturaMaxima){
+                Debug.Log("1");
+                elevador.transform.position = new Vector3(elevador.transform.position.x, alturaMaxima, elevador.transform.position.z);
             }
         }
         else
         {
-            if (!(alturaMinima <= (elevador.transform.position.y - 1.5)))
-            {
-                elevador.transform.position = new Vector3(elevador.transform.position.x, elevador.transform.position.y - 1.5f, elevador.transform.position.z);
-            }
-            else
-            {
-                elevador.transform.position = new Vector3(elevador.transform.position.x, float.Parse(alturaMaxima.ToString()), elevador.transform.position.z);
+            elevador.transform.position = elevador.transform.position - new Vector3(0,1.5f,0);
+
+            if(elevador.transform.position.y < alturaMaxima){
+                Debug.Log("2");
+                Debug.Log(alturaMinima);
+                elevador.transform.position = new Vector3(elevador.transform.position.x, alturaMinima, elevador.transform.position.z);
             }
         }
     }
@@ -61,4 +59,5 @@ public class BotaoEscada : MonoBehaviour
 
         }
     }
+
 }
