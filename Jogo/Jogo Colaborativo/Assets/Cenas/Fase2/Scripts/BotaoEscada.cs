@@ -8,22 +8,17 @@ public class BotaoEscada : MonoBehaviour
     public GameObject elevador;
     public float alturaMinima;
     public float alturaMaxima;
-
-    void Start()
-    {
-        
-    }
-
+    
     public void pressed()
     {
-        Debug.Log(modo);
-
         if(modo){
             elevador.transform.position = elevador.transform.position + new Vector3(0,1.5f,0);
 
             if(elevador.transform.position.y > alturaMaxima){
                 Debug.Log("1");
+                Debug.Log(new Vector3(elevador.transform.position.x, alturaMaxima, elevador.transform.position.z));
                 elevador.transform.position = new Vector3(elevador.transform.position.x, alturaMaxima, elevador.transform.position.z);
+                Debug.Log(elevador.transform.position);
             }
         }
         else
@@ -32,8 +27,9 @@ public class BotaoEscada : MonoBehaviour
 
             if(elevador.transform.position.y < alturaMaxima){
                 Debug.Log("2");
-                Debug.Log(alturaMinima);
+                Debug.Log(new Vector3(elevador.transform.position.x, alturaMinima, elevador.transform.position.z));
                 elevador.transform.position = new Vector3(elevador.transform.position.x, alturaMinima, elevador.transform.position.z);
+                Debug.Log(elevador.transform.position);
             }
         }
     }
