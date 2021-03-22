@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 {
     public Config config;
     public int numberPlayer;
+    public List<string> colisores = new List<string>();
 
     private GameObject BoxFala;
 
@@ -106,7 +107,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D colidor)
     {
-        if (colidor.gameObject.tag == "Plataforma" || colidor.gameObject.tag == "Botão")
+        if (colisores.Contains(colidor.transform.gameObject.tag))
         {
             ground = true;
         }
@@ -114,7 +115,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D colidor)
     {
-        if (colidor.gameObject.tag == "Plataforma" || colidor.gameObject.tag == "Botão")
+        if (colisores.Contains(colidor.transform.gameObject.tag))
         {
             ground = false;
         }
