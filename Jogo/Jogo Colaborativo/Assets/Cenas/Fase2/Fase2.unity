@@ -677,8 +677,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   modo: 1
   elevador: {fileID: 197999872}
-  alturaMinima: -10.63
-  alturaMaxima: -17.2
+  alturaMinima: -4
+  alturaMaxima: -13
 --- !u!61 &285913856
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1149,8 +1149,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   modo: 0
   elevador: {fileID: 197999872}
-  alturaMinima: -10.63
-  alturaMaxima: -17.2
+  alturaMinima: -4
+  alturaMaxima: -13
 --- !u!61 &572831738
 BoxCollider2D:
   m_ObjectHideFlags: 0
