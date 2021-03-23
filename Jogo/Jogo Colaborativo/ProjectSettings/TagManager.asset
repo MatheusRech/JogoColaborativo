@@ -10,6 +10,7 @@ TagManager:
   - Plataforma
   - "Bot\xE3o"
   - Escada
+  - Alvo
   layers:
   - Default
   - TransparentFX

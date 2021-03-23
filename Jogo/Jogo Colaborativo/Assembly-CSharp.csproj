@@ -74,7 +74,11 @@
     <Compile Include="Assets\Cenas\Fase1\Scripts\botaoPortao.cs" />
     <Compile Include="Assets\Cenas\Fase1\Scripts\botaoSequencia.cs" />
     <Compile Include="Assets\Cenas\Fase1\Scripts\cameraManager.cs" />
+    <Compile Include="Assets\Cenas\Fase2\Scripts\AlvoMorteiro.cs" />
     <Compile Include="Assets\Cenas\Fase2\Scripts\BotaoEscada.cs" />
+    <Compile Include="Assets\Cenas\Fase2\Scripts\BotaoMorteiro.cs" />
+    <Compile Include="Assets\Cenas\Fase2\Scripts\InteracaoMorteiro.cs" />
+    <Compile Include="Assets\Cenas\Fase2\Scripts\Morteiro.cs" />
     <Compile Include="Assets\Cenas\Fase2\Scripts\PortoesEscada.cs" />
     <Compile Include="Assets\Cenas\MainMenu\Scripts\AlterCanvas.cs" />
     <Compile Include="Assets\Cenas\MainMenu\Scripts\AlterPanelConfig.cs" />
@@ -87,6 +91,7 @@
     <Compile Include="Assets\Classes\ColorConfig.cs" />
     <Compile Include="Assets\Classes\Config.cs" />
     <Compile Include="Assets\Classes\ConfigGame.cs" />
+    <Compile Include="Assets\Classes\Interacao.cs" />
     <Compile Include="Assets\Classes\Player.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.15f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

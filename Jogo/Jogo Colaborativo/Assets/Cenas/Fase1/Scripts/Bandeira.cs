@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Bandeira : MonoBehaviour
 {
-
+    public string nextFase;
     private int players = 0;
 
     private void OnTriggerEnter2D(Collider2D colisor)
@@ -17,7 +17,7 @@ public class Bandeira : MonoBehaviour
             players++;
 
             if (players == 2)
-                SceneManager.LoadScene("Fase2");
+                SceneManager.LoadScene(nextFase);
 
         }
     }

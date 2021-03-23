@@ -20,12 +20,12 @@ public class Player : MonoBehaviour
     private bool tras;
     private bool ground;
     private Vector2 velocidade;
+    private GameObject objetoInteracao;
 
     void Start()
     {
         BoxFala = gameObject.transform.GetChild(0).gameObject;
         BoxFala.SetActive(false);
-        //DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(this);
         loadConfig();
 
@@ -84,7 +84,18 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(config.interacao.keyCode))
         {
-            // Criar função de interação com objetos
+            if(objetoInteracao != null)
+            {
+                try
+                {
+                    Interacao interacao = (Interacao)objetoInteracao.GetComponent(typeof(Interacao));
+                    interacao.interagir();
+                }
+                catch (Exception)
+                {
+                    Debug.Log("Objeto nao possui Interface interacao");
+                }
+            }
         }
 
         rigidbodyObject.AddForce(velocidade);
@@ -123,6 +134,8 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D colisor)
     {
+        objetoInteracao = colisor.transform.gameObject;
+
         try
         {
             BoxFala.SetActive(true);
@@ -130,6 +143,7 @@ public class Player : MonoBehaviour
         }
         catch (System.Exception)
         {
+            BoxFala.SetActive(false);
             Debug.Log("Erro na colisao com a trigger!");
         }
         
@@ -137,6 +151,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D colisor)
     {
+        objetoInteracao = null;
         BoxFala.SetActive(false);
     }
 }
