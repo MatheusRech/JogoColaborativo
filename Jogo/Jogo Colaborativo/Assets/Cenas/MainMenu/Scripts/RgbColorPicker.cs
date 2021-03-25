@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//Classe que atualiza a cor do preview do RGB
+
 public class RgbColorPicker : MonoBehaviour
 {
     private GameObject red;
@@ -27,6 +29,12 @@ public class RgbColorPicker : MonoBehaviour
         valorBlue = Math.Round((blue.GetComponent<Scrollbar>().value * 255), MidpointRounding.AwayFromZero).ToString();
         alterPreviw();
     }
+    
+
+    //Toda vez que um sider é clicado é passado o seu repectivo objeto alterado, por exemplo:
+    //o jogador mecheu no red do personagem, ele vai passar como objeto alterado o jogador, então as variaveis são recarregadas
+    //e novamente recuperadas
+
 
     public void setRed(string nomeObjeto)
     {

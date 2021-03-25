@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Script do elevador, bem simples detecta a clisão e começar a subir, caso nao detecta desce
+
 public class Elevador : MonoBehaviour
 {
     public Vector3 maximo;

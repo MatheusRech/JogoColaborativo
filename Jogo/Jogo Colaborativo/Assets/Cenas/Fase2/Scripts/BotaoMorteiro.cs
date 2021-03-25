@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Script que retorna para o morteiro se o botão está precionado
 public class BotaoMorteiro : MonoBehaviour
 {
     public bool press { get; private set; }

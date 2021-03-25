@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-
+//Coloca o jogador na posição incial da fase
 public class Configurador : MonoBehaviour
 {
 

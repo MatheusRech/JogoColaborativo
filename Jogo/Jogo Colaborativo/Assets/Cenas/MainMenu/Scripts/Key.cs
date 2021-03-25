@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+//Classe que é utilizada para armazenar as teclas
+
 public class Key
 {
     public KeyCode keyCode { get; private set; }

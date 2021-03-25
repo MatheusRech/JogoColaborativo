@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/*
+ * 
+ * Classe do botão de sequencia
+ * 
+ */
+
 using System.Collections.Generic;
 using UnityEngine;
 

@@ -1,14 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/*
+ * 
+ * Classe que salva as configurações do cor
+ * 
+ */
+
 using UnityEngine;
 
 public class ColorConfig
 {
+    //Cores que podem ser alteradas
     private Color personagem;
     private Color background;
     private Color plataforma;
     private Color objetoInteracao;
 
+    //Cria nova configuração
     public ColorConfig(Color personagem, Color background, Color plataforma, Color objetoInteracao)
     {
         this.personagem = personagem;
@@ -17,6 +23,7 @@ public class ColorConfig
         this.objetoInteracao = objetoInteracao;
     }
 
+    //Devolve cores gravadas
     public Color getPersonagem()
     {
         return this.personagem;

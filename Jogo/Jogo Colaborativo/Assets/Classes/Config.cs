@@ -1,10 +1,16 @@
-﻿using UnityEngine;
+﻿/*
+ * 
+ * Classe que armazena todas as configurações do jogar
+ * 
+ */
+
+using UnityEngine;
 using System;
 using System.IO;
 
 public class Config
 {
-
+    //Teclas de movimento
     public Key paraFrente { get; private set; }
 
     public Key paraTras { get; private set; }
@@ -13,51 +19,50 @@ public class Config
 
     public Key interacao { get; private set; }
 
+
+    //O volume inicialmente foi implementado aqui mais vai ser removido pois faz parte das configurações do jogo e não do jogador
     public float volumePrincipal { get; private set; }
 
     public float volumeMusica { get; private set; }
 
     public float volumeEfx { get; private set; }
 
+    //Desativado por falta de implementação
     public bool modoJoystick { get; private set; }
 
     public int joystickSelection { get; private set; }
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
+    //Vai ser removida
     public void setVolumePrincipal(float volume)
     {
         this.volumePrincipal = volume;
     }
 
+    //Vai ser removida
     public void setVolumeMusica(float volume)
     {
         this.volumeMusica = volume;
     }
 
+    //Vai ser removida
     public void setVolumeEfx(float volume)
     {
         this.volumeEfx = volume;
     }
 
+    //Está desabilitado o modo joystick
     public void setModeJoystick(bool mode)
     {
         this.modoJoystick = mode;
     }
 
+    //Está desabilitado o modo joystick
     public void setJoystick(int joystick)
     {
         this.joystickSelection = joystick;
     }
 
+    //Salva teclas de configuração
     public void setKeyFrente(Key key)
     {
         if (key.keySeted)
@@ -90,6 +95,7 @@ public class Config
         }
     }
 
+    //Carregar uma configuração default
     public static Config defaultConfig(int numberplayer)
     {
         Config defaultConfiguration = new Config();
@@ -119,6 +125,7 @@ public class Config
         return defaultConfiguration;
     }
 
+    //Carrega config do arquivo salvo no dispositivo
     public static Config loadConfig(int numberPlayer)
     {
 
@@ -188,6 +195,7 @@ public class Config
 
     }
 
+    //Salva config em arquivo fisico no dispositivo
     public void saveConfig(int numberPlayer)
     {
         string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\JogoColaborativo\\Config" + numberPlayer.ToString() + ".txt";

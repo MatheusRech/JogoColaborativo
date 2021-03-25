@@ -74,7 +74,6 @@
     <Compile Include="Assets\Cenas\Fase1\Scripts\botaoPortao.cs" />
     <Compile Include="Assets\Cenas\Fase1\Scripts\botaoSequencia.cs" />
     <Compile Include="Assets\Cenas\Fase1\Scripts\cameraManager.cs" />
-    <Compile Include="Assets\Cenas\Fase2\Scripts\AlvoMorteiro.cs" />
     <Compile Include="Assets\Cenas\Fase2\Scripts\BolaMorteiro.cs" />
     <Compile Include="Assets\Cenas\Fase2\Scripts\BotaoEscada.cs" />
     <Compile Include="Assets\Cenas\Fase2\Scripts\BotaoMorteiro.cs" />
@@ -86,7 +85,6 @@
     <Compile Include="Assets\Cenas\MainMenu\Scripts\ConfigControls.cs" />
     <Compile Include="Assets\Cenas\MainMenu\Scripts\Key.cs" />
     <Compile Include="Assets\Cenas\MainMenu\Scripts\RgbColorPicker.cs" />
-    <Compile Include="Assets\Cenas\MainMenu\Scripts\ScrollBar.cs" />
     <Compile Include="Assets\Cenas\MainMenu\Scripts\SetAudioValue.cs" />
     <Compile Include="Assets\Cenas\Scripts\alterScene.cs" />
     <Compile Include="Assets\Classes\ColorConfig.cs" />

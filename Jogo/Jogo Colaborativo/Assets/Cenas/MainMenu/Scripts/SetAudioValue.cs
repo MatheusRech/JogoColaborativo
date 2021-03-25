@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+//Vai deixar de existir em breve
 public class SetAudioValue : MonoBehaviour
 {
     public GameObject audioMaster;

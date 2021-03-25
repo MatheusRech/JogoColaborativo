@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/*
+ * 
+ * Botão utilizado para abrir os portãos
+ * 
+ */
+
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,6 +22,7 @@ public class botaoPortao : MonoBehaviour
         positionPortaoPrimario = portao.transform.position;
     }
 
+    //Função que move o portão
     private void pressed()
     {
         if (isPressed)
@@ -40,7 +46,7 @@ public class botaoPortao : MonoBehaviour
         isPressed = true;
     }
 
-
+    //Detecta a colisão 
     private void OnCollisionEnter2D(Collision2D colisor)
     {
 

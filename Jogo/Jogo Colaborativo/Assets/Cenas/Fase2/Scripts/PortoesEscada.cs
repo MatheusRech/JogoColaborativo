@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Abre os portões quando o jogador um passa para o outro lado
+
 public class PortoesEscada : MonoBehaviour
 {
     public GameObject portaoUm;

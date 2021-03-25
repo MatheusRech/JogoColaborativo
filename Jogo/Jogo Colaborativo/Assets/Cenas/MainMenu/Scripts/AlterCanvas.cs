@@ -1,16 +1,21 @@
 ﻿using System;
 using UnityEngine;
 
+//Script de controle dos menus
+
 public class AlterCanvas : MonoBehaviour
 {
+    //Jogadores
     public GameObject Player1;
     public GameObject Player2;
-
+    //Canvas do menu
     private GameObject canvasMenu;
+    //Canavs da tela de config
     private GameObject canvasConfig;
-
+    //Canvas que esta aberto
     private int canvasAtivo;
 
+    //Recebe os canvas
     void Start()
     {
         try
@@ -32,7 +37,7 @@ public class AlterCanvas : MonoBehaviour
     {
         canvasConfig.SetActive(false);
     }
-
+    //seleciona o menu ativo
     public void alterCanvas(int canvas)
     {
         

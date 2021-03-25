@@ -1,19 +1,27 @@
-﻿using System;
+﻿/*
+ * 
+ * Classe que configura a camera
+ * 
+ */
+
+using System;
 using UnityEngine;
 
 public class cameraManager : MonoBehaviour
 {
+    //Objeto da camera
     public GameObject gameObjectCamera;
+    //Classe da camera
     private Camera objetoCamera;
-
+    //Posição dos jogadores
     private Vector3 player1;
     private Vector3 player2;
-
+    //Posição da camera
     private Vector3 cameraPosition;
-
+    //Disabilita o script temporariamente
     private bool disable;
 
-
+    //Incia variaveis
     void Start()
     {
         objetoCamera = gameObjectCamera.GetComponent<Camera>();
@@ -21,6 +29,7 @@ public class cameraManager : MonoBehaviour
         disable = false;
     }
 
+    //loop que fica reposicionando a camera
     void Update()
     {
         if (disable)
@@ -28,7 +37,7 @@ public class cameraManager : MonoBehaviour
             return;
         }
 
-
+        //Caso um jogador seja deletado para o script pq deu muita merda
         try
         {
             player1 = GameObject.FindGameObjectWithTag("Player1").transform.position;
@@ -39,18 +48,22 @@ public class cameraManager : MonoBehaviour
             return;
         }
 
-
+        //Posição media entre os jogadores no eixo x
         //  Distancia da camera
         float sizex = player1.x - player2.x;
 
+        //Posição media entre os jogadores no eixo y
         float sizey = player1.y - player2.y;
+
         float size = sizex + sizey;
 
+        //Correção de espaço caso seja negativo arruma as posições
         if (size < 0)
             size = (sizex * -1) + (sizey * -1);
 
+        //Aplica a area de ampliação da camera
         objetoCamera.orthographicSize = size;
-
+        //Aplica o maximo e o minimo de zoom
         if (objetoCamera.orthographicSize > 21.6)
         {
             objetoCamera.orthographicSize = 21.6f;
@@ -117,6 +130,7 @@ public class cameraManager : MonoBehaviour
 
     }
 
+    //Função que desabilita/habilita o script
     public void disabilitarCamera(bool disable)
     {
         this.disable = disable;

@@ -1,4 +1,12 @@
-﻿using System;
+﻿/*
+ * 
+ * Esse script ficou muito grande e algum dia pode ser alterado, mais eu fiz meio que na velociade
+ * Controla as configurações do jogador e do jogo, esse script é um hub de todas as configs
+ * 
+ */
+
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,17 +14,20 @@ using UnityEngine.UI;
 
 public class ConfigControls : MonoBehaviour
 {
+    //jogador um
     public Player player1;
+    //jogador dois
     public Player player2;
-
+    //todos os itens configuraveis do jogador
     public List<GameObject> botoes;
-
+    //menssagem de aviso sobre a configuraçao
     public Text warning;
-
+    //imagens dos botoes do controle
     public Sprite[] imagensBotoes;
-
+    //painel de configuração das cores
     public GameObject painelColor;
 
+    //enumerado da tecla que está sendo alterada
     private enum teclaEscolha
     {
         Pular,
@@ -25,14 +36,16 @@ public class ConfigControls : MonoBehaviour
         Interacao
     }
 
+    //configurãção do jogador um
     private Config config1;
+    //configuração do jogador dois
     private Config config2;
-
+    //variaveis de controle para saber qual tecla está sendo alterada
     private bool pular;
     private bool paraFrente;
     private bool paraTras;
     private bool interacao;
-
+    //tecla precionada
     private Key keyPressed;
 
     void Start()
@@ -40,7 +53,7 @@ public class ConfigControls : MonoBehaviour
         pular = false;
         paraFrente = false;
         paraTras = false;
-
+        //carrega a configuração default
         config1 = Config.defaultConfig(1);
         config2 = Config.defaultConfig(2);
 
@@ -50,6 +63,7 @@ public class ConfigControls : MonoBehaviour
 
     void Update()
     {
+        //Vai ser removido daqui
         try
         {
             switch (GameObject.Find("SeletorJogador").GetComponent<Dropdown>().value)
@@ -70,17 +84,21 @@ public class ConfigControls : MonoBehaviour
         {
 
         }
-
+        //Quando um botao é clicado para altera a sua tecla, ex: cliquei no botão andar para frente
         if(pular || paraFrente || paraTras || interacao)
         {
+            //Cria uma tecla vazia
             keyPressed = new Key();
-
+            //Varre todas as teclas num loop para saber qual tecla foi precionada
             foreach (KeyCode vKey in System.Enum.GetValues(typeof(KeyCode)))
             {
+                //Se uma tecla esta precionada retorna true
                 if (Input.GetKey(vKey))
                 {
+                    //se a tecla for diferente da tecla escape
                     if(vKey != KeyCode.Escape)
                     {
+                        //verifica se a tecla ja não está em uma outra configuração
                         if(vKey == config1.paraFrente.keyCode || vKey == config1.paraTras.keyCode || vKey == config1.pular.keyCode || vKey == config2.paraFrente.keyCode || vKey == config2.paraTras.keyCode || vKey == config2.pular.keyCode)
                         {
                             pular = false;
@@ -97,6 +115,7 @@ public class ConfigControls : MonoBehaviour
                     }
                     else
                     {
+                        //tecla de cancelar a nova tecla foi clicada
                         pular = false;
                         paraFrente = false;
                         paraTras = false;
@@ -104,7 +123,7 @@ public class ConfigControls : MonoBehaviour
                     }
                 }
             }
-
+            //Coloca a tecla escolhida no lugar certo
             if (pular && keyPressed.keySeted)
             {
                 changeTecla("Pular", teclaEscolha.Pular);
@@ -128,6 +147,7 @@ public class ConfigControls : MonoBehaviour
         }
     }
 
+    //Troca a tecla na config
     private void changeTecla(string nomeBotao, teclaEscolha opcao)
     {
         switch (GameObject.Find("SeletorJogador").GetComponent<Dropdown>().value)
@@ -150,6 +170,7 @@ public class ConfigControls : MonoBehaviour
                     config1.setKeyInteracao(keyPressed);
                 }
 
+                //Se for um joystick coloca a foto do botão
                 foreach (GameObject botao in botoes)
                 {
                     if (botao.name == nomeBotao)
@@ -290,7 +311,7 @@ public class ConfigControls : MonoBehaviour
         warning.text = "Pressione algum botão que fará o personagem interagir com objetos ou a tecla ESC para cancelar.";
     }
 
-
+    //Carrega a configuração do jogador selecionado
     public void setPlayer()
     {
         switch (GameObject.Find("SeletorJogador").GetComponent<Dropdown>().value)
@@ -367,7 +388,7 @@ public class ConfigControls : MonoBehaviour
                 break;
         }
     }
-
+    //Salva a config do jogador e do jogo
     public void salvar()
     {
         switch (GameObject.Find("SeletorJogador").GetComponent<Dropdown>().value)
@@ -433,6 +454,7 @@ public class ConfigControls : MonoBehaviour
         
     }
 
+    //Não está implementado
     public void onJoystickModeSet()
     {
         warning.text = "Após você alterar está configuração os controles do personagem só iram funcionar no Joystick.";
@@ -446,6 +468,7 @@ public class ConfigControls : MonoBehaviour
         }
     }
 
+    //Não está implementado
     public void onJoystickSelect()
     {
         if (GameObject.Find("JoystickSelection").GetComponent<Dropdown>().value == 0)
@@ -462,7 +485,7 @@ public class ConfigControls : MonoBehaviour
             config2.setJoystick(GameObject.Find("JoystickSelection").GetComponent<Dropdown>().value);
         }
     }
-
+    //Carrega a config após a tela abrir
     public void carregarConfig()
     {
         player1.loadConfig();

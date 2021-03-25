@@ -1,13 +1,22 @@
-﻿using System.Collections;
+﻿/*
+ * 
+ * Classe para criar a caixa que o jagador precisa para desbloquear os portões
+ * 
+ */
+
 using System.Collections.Generic;
 using UnityEngine;
 
 public class botaoCaixa : MonoBehaviour
 {
+    //Prefab da caixa
     public GameObject Caixa;
+    //Local de spaw da caixa
     public Vector3 spwan;
 
+    //caixas criadas
     private List<GameObject> caixas;
+    //estado do botão
     private bool pressed;
 
     void Start()
@@ -16,11 +25,7 @@ public class botaoCaixa : MonoBehaviour
         pressed = false;
     }
 
-    void Update()
-    {
-        
-    }
-
+    //Cria a caixa na posição
     private void OnCollisionEnter2D(Collision2D colidor)
     {
 
@@ -38,6 +43,8 @@ public class botaoCaixa : MonoBehaviour
                         return;
                     pressed = true;
                     gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 0.39f, gameObject.transform.position.z);
+                    
+                    //Caso já exita uma caixa destroy a ultima e cria uma nova
                     if (caixas.Count > 0)
                     {
                         Destroy(caixas[0]);

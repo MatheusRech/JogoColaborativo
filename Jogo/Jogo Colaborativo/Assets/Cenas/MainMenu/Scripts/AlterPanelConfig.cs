@@ -1,6 +1,8 @@
 ﻿using System;
 using UnityEngine;
 
+//Controle dos paines de configuração
+
 public class AlterPanelConfig : MonoBehaviour
 {
     private GameObject configAudio;
@@ -27,6 +29,7 @@ public class AlterPanelConfig : MonoBehaviour
         }
     }
 
+    //seleciona o painel aberto
     public void alterPanel(int panel)
     {
         if(panel == panelAtivo)
