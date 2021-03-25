@@ -2561,12 +2561,12 @@ PrefabInstance:
     - target: {fileID: 681817081645276421, guid: 75c638afedd3d9843969bc27ecefa06b,
         type: 3}
       propertyPath: m_Offset.x
-      value: 87.84921
+      value: 80.90298
       objectReference: {fileID: 0}
     - target: {fileID: 681817081645276421, guid: 75c638afedd3d9843969bc27ecefa06b,
         type: 3}
       propertyPath: m_Size.x
-      value: 9.846809
+      value: 12.345383
       objectReference: {fileID: 0}
     - target: {fileID: 681817081645276421, guid: 75c638afedd3d9843969bc27ecefa06b,
         type: 3}
@@ -3291,6 +3291,8 @@ MonoBehaviour:
   baseCanhao: {fileID: 1052024584}
   BotaoFrente: {fileID: 2083151564}
   BotaoTraz: {fileID: 2141327825}
+  cameraJogo: {fileID: 1122455668}
+  manager: {fileID: 1192028775}
 --- !u!4 &1212198061
 Transform:
   m_ObjectHideFlags: 0
@@ -3323,7 +3325,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 105.67103, y: 4.870654}
+  m_Offset: {x: 105.82094, y: 6.070009}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -3334,7 +3336,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 9.804825, y: 3.764101}
+  m_Size: {x: 15.101952, y: 6.1628113}
   m_EdgeRadius: 0
 --- !u!114 &1212198063
 MonoBehaviour:

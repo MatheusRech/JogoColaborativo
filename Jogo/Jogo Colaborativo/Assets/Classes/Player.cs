@@ -4,6 +4,7 @@ using System;
 using System.Text;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System.Linq;
 
 public class Player : MonoBehaviour
 {
@@ -85,15 +86,19 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(config.interacao.keyCode))
         {
             if(objetoInteracao != null)
-            {
+            {  
                 try
                 {
-                    Interacao interacao = (Interacao)objetoInteracao.GetComponent(typeof(Interacao));
-                    interacao.interagir();
+                    var interfaceScripts = objetoInteracao.GetComponents<MonoBehaviour>().OfType<Interacao>();
+
+                    foreach (var iScript in interfaceScripts)
+                    {
+                        iScript.interagir();
+                    }
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    Debug.Log("Objeto nao possui Interface interacao");
+                    Debug.Log("Objeto nao possui Interface interacao: " + objetoInteracao.name + "\n" + e.Message);
                 }
             }
         }
@@ -141,10 +146,10 @@ public class Player : MonoBehaviour
             BoxFala.SetActive(true);
             BoxFala.transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text = colisor.GetComponent<TutorialMensagem>().mensagem;
         }
-        catch (System.Exception)
+        catch (System.Exception e)
         {
             BoxFala.SetActive(false);
-            Debug.Log("Erro na colisao com a trigger!");
+            Debug.Log("Erro na colisao com a trigger!\n"+e.Message);
         }
         
     }

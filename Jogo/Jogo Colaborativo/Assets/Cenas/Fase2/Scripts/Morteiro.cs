@@ -8,14 +8,15 @@ public class Morteiro : MonoBehaviour
     public GameObject projetil;
     public float maxAngle;
     public GameObject canhao;
-    public GameObject baseCanhao;
     public GameObject BotaoFrente;
     public GameObject BotaoTraz;
+    public GameObject cameraJogo;
+    public cameraManager manager;
 
     private float forceX = 1;
     private float forceY = 25;
-
     private float angle = 0;
+    private GameObject bola;
 
     void Update()
     {
@@ -36,6 +37,14 @@ public class Morteiro : MonoBehaviour
 
     public void disparar()
     {
+        manager.disabilitarCamera(true);
+
+        if(bola != null)
+        {
+            cameraJogo.transform.parent = null;
+            Destroy(bola);
+        }
+
         forceX = (((canhao.transform.rotation.z * 100) - 6) * 0.388888f) * -1;
         forceY = (((canhao.transform.rotation.z * 100) - 6) * 0.155555f) + 18;
 
@@ -46,9 +55,16 @@ public class Morteiro : MonoBehaviour
         
         GameObject disparo = Instantiate(projetil);
 
-        disparo.transform.position = baseCanhao.transform.position;
+        disparo.transform.position = canhao.transform.position + new Vector3(0,1,0);
 
         disparo.GetComponent<Rigidbody2D>().AddForce(new Vector2(forceX, forceY), ForceMode2D.Impulse);
+
+        bola = disparo;
+
+        cameraJogo.transform.parent = disparo.transform;
+        cameraJogo.transform.position = disparo.transform.position - new Vector3(0,0,10);
+
+        disparo.GetComponent<BolaMorteiro>().include(cameraJogo, manager, this);
     }
 
     public void acerto()

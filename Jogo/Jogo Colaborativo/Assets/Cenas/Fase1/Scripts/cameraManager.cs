@@ -11,16 +11,24 @@ public class cameraManager : MonoBehaviour
 
     private Vector3 cameraPosition;
 
+    private bool disable;
+
 
     void Start()
     {
         objetoCamera = gameObjectCamera.GetComponent<Camera>();
         cameraPosition = gameObjectCamera.transform.position;
-
+        disable = false;
     }
 
     void Update()
     {
+        if (disable)
+        {
+            return;
+        }
+
+
         try
         {
             player1 = GameObject.FindGameObjectWithTag("Player1").transform.position;
@@ -28,7 +36,7 @@ public class cameraManager : MonoBehaviour
         }
         catch (Exception)
         {
-
+            return;
         }
 
 
@@ -107,5 +115,10 @@ public class cameraManager : MonoBehaviour
 
         gameObjectCamera.transform.position = cameraPosition;
 
+    }
+
+    public void disabilitarCamera(bool disable)
+    {
+        this.disable = disable;
     }
 }

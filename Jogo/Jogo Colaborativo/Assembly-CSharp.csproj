@@ -75,6 +75,7 @@
     <Compile Include="Assets\Cenas\Fase1\Scripts\botaoSequencia.cs" />
     <Compile Include="Assets\Cenas\Fase1\Scripts\cameraManager.cs" />
     <Compile Include="Assets\Cenas\Fase2\Scripts\AlvoMorteiro.cs" />
+    <Compile Include="Assets\Cenas\Fase2\Scripts\BolaMorteiro.cs" />
     <Compile Include="Assets\Cenas\Fase2\Scripts\BotaoEscada.cs" />
     <Compile Include="Assets\Cenas\Fase2\Scripts\BotaoMorteiro.cs" />
     <Compile Include="Assets\Cenas\Fase2\Scripts\InteracaoMorteiro.cs" />
