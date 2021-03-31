@@ -17,6 +17,12 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
+    - target: {fileID: 3438795513066323546, guid: 2f3b6ddd7e2b7744aaf9ba5868aa4f9f,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 50d1bd26ee7be4d4c88532b10e50b175,
+        type: 3}
     - target: {fileID: 4197067481523101106, guid: 2f3b6ddd7e2b7744aaf9ba5868aa4f9f,
         type: 3}
       propertyPath: m_LocalPosition.x
