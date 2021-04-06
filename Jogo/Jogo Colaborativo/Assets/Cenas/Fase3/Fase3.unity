@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -230,10 +230,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 101957393}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 378803ca532905e44a98746e2dfed932, type: 3}
+  m_Script: {fileID: 11500000, guid: cba8a9c49b4b3894aa9de5aecfe3166f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObjectCamera: {fileID: 542995873}
 --- !u!114 &101957395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -673,7 +672,6 @@ MonoBehaviour:
   m_Cameras: []
   m_RendererIndex: -1
   m_VolumeLayerMask:
-    serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_RenderPostProcessing: 0
@@ -791,7 +789,7 @@ PrefabInstance:
     - target: {fileID: 824994121179061675, guid: 75c638afedd3d9843969bc27ecefa06b,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1401975932349056858, guid: 75c638afedd3d9843969bc27ecefa06b,
         type: 3}
@@ -1085,7 +1083,7 @@ PrefabInstance:
     - target: {fileID: 824994121179061675, guid: 75c638afedd3d9843969bc27ecefa06b,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1401975932349056858, guid: 75c638afedd3d9843969bc27ecefa06b,
         type: 3}
@@ -1445,7 +1443,7 @@ PrefabInstance:
     - target: {fileID: 824994121179061675, guid: 75c638afedd3d9843969bc27ecefa06b,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1401975932349056858, guid: 75c638afedd3d9843969bc27ecefa06b,
         type: 3}
@@ -1610,7 +1608,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d7a3433fb8388b84d8971fe9da681e78, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 560714073911fcd44bf4f5ffb898e73f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2332,7 +2330,7 @@ PrefabInstance:
     - target: {fileID: 824994121179061675, guid: 75c638afedd3d9843969bc27ecefa06b,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1401975932349056858, guid: 75c638afedd3d9843969bc27ecefa06b,
         type: 3}
