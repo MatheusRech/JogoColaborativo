@@ -15,12 +15,16 @@ public class Dragao : MonoBehaviour
     private int ataques;
     private float player;
     private bool find;
+    private bool atacou;
+    private bool subir;
 
     void Start()
     {
+        ataques = 0;
         animation = gameObject.GetComponent<Animator>();
         animation.SetBool("Ataque", false);
         find = false;
+        atacou = false;
     }
     void Update()
     {
@@ -28,8 +32,8 @@ public class Dragao : MonoBehaviour
         {
             try
             {
-                player1 = GameObject.FindGameObjectWithTag("Jogador1");
-                player2 = GameObject.FindGameObjectWithTag("Jogador2");
+                player1 = GameObject.FindGameObjectWithTag("Player1");
+                player2 = GameObject.FindGameObjectWithTag("Player2");
                 find = true;
             }
             catch (Exception)
@@ -37,39 +41,59 @@ public class Dragao : MonoBehaviour
                 return;
             }
         }
-        
 
-        if (ataques == 5)
-        {
-            player = UnityEngine.Random.Range(0, 1);
-        }
 
-        if (player <= 0.4)
+        if (atacou)
         {
-            MoveDragao(player1);
+            if (ataques == 5)
+            {
+                ataques = 0;
+                player = UnityEngine.Random.Range(0, 1);
+            }
+
+            if (player <= 0.4)
+            {
+                MoveDragao(player1);
+            }
+            else
+            {
+                MoveDragao(player2);
+            }
         }
         else
         {
-            MoveDragao(player2);
+            if (player <= 0.4)
+            {
+                MoveDragao(player1);
+            }
+            else
+            {
+                MoveDragao(player2);
+            }
         }
+
+        
     }
 
     private void MoveDragao(GameObject player)
     {
-        if (transform.position.y == player.transform.position.y)
+
+        if (transform.position.y >= player.transform.position.y-1.8f && transform.position.y <= player.transform.position.y+1.8f)
         {
             StartAtaque();
+            atacou = true;
         }
         else
         {
             if (transform.position.y > player.transform.position.y)
             {
-                transform.position -= new Vector3(0, 0.4f);
+                subir = false;
             }
             else
             {
-                transform.position += new Vector3(0, 0.4f);
+                subir = true;
             }
+            EndAtaque();
         }
     }
 
@@ -82,6 +106,30 @@ public class Dragao : MonoBehaviour
     {
         GameObject ataque = Instantiate(fogoDragao);
         ataque.transform.position = transform.position - new Vector3(2, 0);
+        ataques++;
+        EndAtaque();
+    }
+
+    public void MovimentoSubindo()
+    {
+        if (!subir)
+            return;
+        for(int x = 0; x < 5; x++)
+        {
+            transform.position += new Vector3(0, 0.4f);
+        }
+    }
+
+    public void MovimentoDescendo()
+    {
+        if (subir)
+            return;
+
+        for (int x = 0; x < 5; x++)
+        {
+            transform.position -= new Vector3(0, 0.3f);
+        }
+        
     }
 
     public void EndAtaque()

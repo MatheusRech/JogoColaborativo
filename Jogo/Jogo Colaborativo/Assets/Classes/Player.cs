@@ -189,7 +189,7 @@ public class Player : MonoBehaviour
         {
             //Caso não existe menssagem de ajuda na trigger fecha o box de ajuda
             BoxFala.SetActive(false);
-            Debug.Log("Erro na colisao com a trigger!\n"+e.Message);
+            //Debug.Log("Erro na colisao com a trigger!\n"+e.Message);
         }
         
     }

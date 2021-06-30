@@ -1,30 +1,39 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StartFase : MonoBehaviour
 {
-    private bool find;
+    public bool find;
+
     void Start()
     {
         find = false;
+        StartCoroutine(update());
+        GameObject.FindGameObjectWithTag("Player1").GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        GameObject.FindGameObjectWithTag("Player2").GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
     }
 
-    void Update()
+    IEnumerator update()
     {
-        if (find)
-            return;
-        try
+        while (true)
         {
-            GameObject.FindGameObjectWithTag("Player1").transform.position = new Vector3(-55f, 11.229f, 0f);
-            GameObject.FindGameObjectWithTag("Player2").transform.position = new Vector3(-55f, -25.870f, 0f);
-            gameObject.GetComponent<cameraManager>().disabilitarCamera(true);
-            find = true;
-        }
-        catch (Exception)
-        {
+            if (find)
+                break;
 
+            yield return new WaitForSeconds(0.25f);
+
+            try
+            {
+                GameObject.FindGameObjectWithTag("Player1").transform.position = new Vector3(-55f, 11.229f, 0f);
+                GameObject.FindGameObjectWithTag("Player2").transform.position = new Vector3(-55f, -25.870f, 0f);
+                find = true;
+            }
+            catch (Exception)
+            {
+
+            }
         }
+        
     }
 }
